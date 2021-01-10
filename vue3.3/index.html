@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="theme.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container pt-5" id="app" v-cloak>
+        <div class="card center p-2">
+            <div v-html="myHtml"></div>
+            <!-- замена интерполяции -->
+<!--            <h2 v-text="title"></h2>-->
+<!--            &lt;!&ndash; Данные не будут изменяться, даже если измениться модель &ndash;&gt;-->
+<!--            <h2 v-once>{{ title }}</h2>-->
+<!--            &lt;!&ndash; для дебага, без компеляции &ndash;&gt;-->
+<!--            <h2 v-pre>{{ title }}</h2>-->
+
+
+            <div class="form-control">
+                <input type="text" v-on:keyup.shift.enter="addItem" ref="myInput">
+            </div>
+
+            <ul class="list" v-if="items.length">
+<!--                <li class="list-item" v-for="item in 7">-->
+<!--                    {{ item }}-->
+<!--                </li>-->
+<!--                <li class="list-item" v-for="(value, key) in person">-->
+<!--                   <strong>{{key}}</strong> {{ value }}-->
+<!--                </li>-->
+                <!-- TODO сделать измениния контента в инуте по энтру -->
+                <!-- evenItems -->
+                <li
+                        class="list-item"
+                        v-for="(item, i) in items"
+                        @click.right.prevent="remove(i), log(item)"
+                        :key="item"
+                >
+                    <strong>{{ item }}</strong>&nbsp;
+                    <input type="text" @click.stop>
+                </li>
+            </ul>
+            <h3 v-show="items.length === 0">Элементов нет</h3>
+        </div>
+    </div>
+
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+</body>
+</html>
